@@ -20,8 +20,12 @@ const Header = ({ text, goBack }: { text: string; goBack: boolean }) => {
           </div>
         </div>
       ) : null}
-      <div className="flex-1 flex justify-center text-center">{text}</div>
-      <div className="flex-1 flex justify-end hidden md:flex"></div>
+      <div className="flex-1 flex justify-end md:justify-center md:text-center text-right">
+        {text}
+      </div>
+      {goBack ? (
+        <div className="flex-1 flex justify-end hidden md:flex"></div>
+      ) : null}
     </header>
   );
 };

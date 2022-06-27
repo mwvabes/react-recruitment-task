@@ -94,7 +94,7 @@ const Pagination = ({
         </span>
       </button>
       <button
-        className={`flex border border-slate-400 justify-center rounded-tr-md rounded-br-md ${
+        className={`flex border border-slate-400 justify-center rounded-tr-md rounded-br-md bg-sky-800 ${
           next == null ? "opacity-60" : "hover:opacity-80"
         } transition-opacity ease-in-out duration-185`}
         onClick={() => handlePagination("end")}
