@@ -11,7 +11,9 @@ interface LocationType {
   name: string;
   dimension: string;
   type: string;
-  residents: [];
+  residents: {
+    id: number;
+  }[];
 }
 
 const CharacterLoader = () => {
@@ -42,6 +44,19 @@ const Location = () => {
   const { error, loading, data } = useQuery(GET_LOCATION, {
     variables: { id: locationId },
   });
+
+  const handleDelete = (id: number) => {
+    if (location === null) return;
+
+    const loc = {
+      ...location,
+      ["residents"]: location.residents.filter(
+        (resident) => resident.id !== id
+      ),
+    };
+
+    setLocation(loc);
+  };
 
   useEffect(() => {
     if (!error && !loading) {
@@ -75,8 +90,8 @@ const Location = () => {
             -
           </h1>
           <div className="flex flex-row flex-wrap justify-between">
-            {Array.apply(null, Array(25)).map(() => (
-              <CharacterLoader />
+            {Array.apply(null, Array(25)).map((e, i) => (
+              <CharacterLoader key={i} />
             ))}
           </div>
         </div>
@@ -98,9 +113,18 @@ const Location = () => {
         <h1 className="text-center text-2xl py-2 border-t border-slate-700">
           - Residents -
         </h1>
-        <div className="flex flex-row flex-wrap justify-between">
+
+        {location.residents.length == 0 ? (
+          <p className="self-center text-center my-10">No residents found.</p>
+        ) : null}
+
+        <div className="flex flex-row flex-wrap justify-center">
           {location.residents.map((resident: any) => (
-            <CharacterShortcut character={resident} key={resident.id} />
+            <CharacterShortcut
+              character={resident}
+              key={resident.id}
+              handleDelete={handleDelete}
+            />
           ))}
         </div>
       </div>

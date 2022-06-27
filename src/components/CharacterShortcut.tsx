@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { BsTrash } from "react-icons/bs";
 import { Link } from "react-router-dom";
 
@@ -11,9 +11,29 @@ interface Character {
   image: string;
 }
 
-const CharacterShortcut = ({ character }: { character: Character }) => {
+const CharacterShortcut = ({
+  character,
+  handleDelete,
+}: {
+  character: Character;
+  handleDelete: Function;
+}) => {
+  const [isBeingDeleted, setIsBeingDeleted] = useState<boolean>(false);
+
+  const handleIsBeingDeleted = (id: number) => {
+    setIsBeingDeleted(true);
+
+    setTimeout(() => {
+      handleDelete(id);
+    }, 200);
+  };
+
   return (
-    <div className="flex flex-col xl:w-1/6 md:w-1/4 w-full m-2 items-center px-3 py-3 justify-between rounded-xl border border-sky-700 bg-slate-900 text-slate-200">
+    <div
+      className={`flex flex-col xl:w-1/6 md:w-1/4 w-full m-2 items-center px-3 py-3 justify-between rounded-xl border border-sky-700 bg-slate-900 text-slate-200 transition-opacity ease-in-out duration-200 ${
+        isBeingDeleted ? "opacity-0" : null
+      }`}
+    >
       <img
         src={character.image}
         alt={`${character.name} image`}
@@ -24,9 +44,6 @@ const CharacterShortcut = ({ character }: { character: Character }) => {
       </div>
       <div className="mb-2 flex flex-col items-center justify-center">
         <span className="text-slate-400">Status: {character.status}</span>
-        {/* <span className="bg-gray-900 text-slate-400 p-1 rounded-lg">
-          Dimension: {location.dimension}
-        </span> */}
       </div>
       <div className="flex flex-wrap">
         <Link to={`${character.id}`}>
@@ -34,7 +51,10 @@ const CharacterShortcut = ({ character }: { character: Character }) => {
             DETAILS
           </button>
         </Link>
-        <button className="bg-slate-700 p-2 grow-0 rounded-tr-lg rounded-br-lg border border-slate-400 text-xl font-bold text-slate-200 text-sm hover:opacity-80 transition ease-in-out duration-150 hover:text-red-600 hover:bg-slate-50 hover:border-red-600">
+        <button
+          className="bg-slate-700 p-2 grow-0 rounded-tr-lg rounded-br-lg border border-slate-400 text-xl font-bold text-slate-200 text-sm hover:opacity-80 transition ease-in-out duration-150 hover:text-red-600 hover:bg-slate-50 hover:border-red-600"
+          onClick={() => handleIsBeingDeleted(character.id)}
+        >
           <BsTrash />
         </button>
       </div>

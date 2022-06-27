@@ -91,6 +91,19 @@ const Character = () => {
     setShowEditModal(value);
   };
 
+  const handleEditCharacter = (c: CharacterType) => {
+    if (character === null || c === null) return;
+    if (c.id !== character.id) return;
+
+    setCharacter({
+      ...character,
+      ["gender"]: c.gender,
+      ["status"]: c.status,
+      ["species"]: c.species,
+      ["type"]: c.type,
+    });
+  };
+
   useEffect(() => {
     if (!error && !loading) {
       setCharacter(data.character);
@@ -116,7 +129,7 @@ const Character = () => {
             <img
               src={character.image}
               alt={`${character.name} image`}
-              className="object-contain w-52 h-52 rounded-3xl border-2 border-slate-700 shadow-3xl"
+              className="object-contain md:w-52 md:h-52 w-24 h-24 rounded-3xl border-2 border-slate-700 shadow-3xl"
             />
             <div className="flex flex-col">
               <p className="text-2xl text-slate-50">
@@ -133,11 +146,12 @@ const Character = () => {
         </div>
 
         <div className="flex flex-col items-center flex-1 m-2 p-3 justify-center text-slate-300">
-          <button className="flex flex-row items-center p-2 border border-sky-700 bg-sky-900 rounded-lg">
+          <button
+            className="flex flex-row items-center p-2 border border-sky-700 bg-sky-900 rounded-lg"
+            onClick={() => handleShowEditModal(true)}
+          >
             <BsFillPencilFill />
-            <button className="ml-2" onClick={() => handleShowEditModal(true)}>
-              Edit Character details
-            </button>
+            <span className="ml-2">Edit Character details</span>
           </button>
         </div>
 
@@ -145,6 +159,7 @@ const Character = () => {
           character={character}
           show={showEditModal}
           handleShowEditModal={handleShowEditModal}
+          handleEditCharacter={handleEditCharacter}
         />
       </div>
     </div>
