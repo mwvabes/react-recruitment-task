@@ -36,7 +36,7 @@ const CharacterShortcut = ({
     >
       <img
         src={character.image}
-        alt={`${character.name} image`}
+        alt={`${character.name}`}
         className="object-contain w-20 rounded-3xl border-2 border-slate-700 shadow-3xl"
       />
       <div className="mt-2 text-center">

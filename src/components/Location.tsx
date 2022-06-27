@@ -114,7 +114,7 @@ const Location = () => {
           - Residents -
         </h1>
 
-        {location.residents.length == 0 ? (
+        {location.residents.length === 0 ? (
           <p className="self-center text-center my-10">No residents found.</p>
         ) : null}
 

@@ -128,7 +128,7 @@ const Character = () => {
           <div className="flex space-x-4">
             <img
               src={character.image}
-              alt={`${character.name} image`}
+              alt={`${character.name}`}
               className="object-contain md:w-52 md:h-52 w-24 h-24 rounded-3xl border-2 border-slate-700 shadow-3xl"
             />
             <div className="flex flex-col">

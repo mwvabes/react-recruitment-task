@@ -1,7 +1,5 @@
 import React, { useState } from "react";
-import { BsTrash } from "react-icons/bs";
 import { AiOutlineClose } from "react-icons/ai";
-import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
 interface Character {
@@ -17,13 +15,6 @@ interface Character {
 const defaultMessage = "Use a form to edit Character details.";
 const successMessage = "Data saved successfully!";
 
-interface FormData {
-  gender: string;
-  type: string;
-  species: string;
-  status: string;
-}
-
 const EditCharacterModal = ({
   character,
   show,
@@ -38,7 +29,6 @@ const EditCharacterModal = ({
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm();
   const onSubmit = (data: any) => {
