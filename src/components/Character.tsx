@@ -110,14 +110,33 @@ const Character = () => {
     }
   }, [data]);
 
-  if (loading || character == null)
+  if (loading && character == null)
     return (
       <>
+        {JSON.stringify(character)}
         <CharacterLoader />
       </>
     );
 
-  if (!loading && character == null) return <>Not found</>;
+  if (character === null)
+    return (
+      <div className="flex flex-col items-center">
+        <div className="max-w-5xl w-full">
+          <Header text={""} goBack={true} />
+          <p className="m-2 text-center">Character not found.</p>
+        </div>
+      </div>
+    );
+
+  if (error)
+    return (
+      <div className="flex flex-col items-center">
+        <div className="max-w-5xl w-full">
+          <Header text={""} goBack={true} />
+          <p className="m-2 text-center">An error occured</p>
+        </div>
+      </div>
+    );
 
   return (
     <div className="flex flex-col items-center">

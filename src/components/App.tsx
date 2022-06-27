@@ -148,6 +148,26 @@ const App = () => {
     }
   }, [data]);
 
+  if (locations === null)
+    return (
+      <div className="flex flex-col items-center">
+        <div className="max-w-5xl w-full">
+          <Header text={""} goBack={false} />
+          <p className="m-2 text-center">Locations not found.</p>
+        </div>
+      </div>
+    );
+
+  if (error)
+    return (
+      <div className="flex flex-col items-center">
+        <div className="max-w-5xl w-full">
+          <Header text={""} goBack={false} />
+          <p className="m-2 text-center">An error occured</p>
+        </div>
+      </div>
+    );
+
   return (
     <div className="flex flex-col items-center">
       <div className="max-w-5xl w-full mb-5 pb-10 border-b border-slate-700">
@@ -166,10 +186,6 @@ const App = () => {
                 <LocationLoader key={i} />
               ))
             : null}
-
-          {locations.length == 0 ? (
-            <p className="self-center text-center my-10">No locations found.</p>
-          ) : null}
 
           {locations.map((location) => (
             <LocationShortcut location={location} key={location.id} />
