@@ -42,8 +42,6 @@ const EditCharacterModal = ({
     formState: { errors },
   } = useForm();
   const onSubmit = (data: any) => {
-    console.log(data);
-
     handleEditCharacter({
       ...character,
       ["gender"]: data.gender,
