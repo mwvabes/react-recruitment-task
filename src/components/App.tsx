@@ -125,7 +125,7 @@ const App = () => {
       sessionStorage.setItem("page", "1");
       setPage(1);
     }
-    if (type === "end" && prev != null) {
+    if (type === "end") {
       sessionStorage.setItem("page", pages ? pages : "1");
       setPage(pages ? pages : 1);
     }
